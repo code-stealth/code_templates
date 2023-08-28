@@ -8,9 +8,9 @@ int fn(vector<int>& v, int left, int right){
     int i = left;
     int j = right;
     while(i<j){
-        while(v[i] <= pivot && i <= right)
+        while(v[i] <= pivot && i <= right-1)
             i++;
-        while(v[j] > pivot && j>=left) 
+        while(v[j] > pivot && j>=left+1) 
             j--;
         if(i<j) swap(v[i], v[j]);
     }
