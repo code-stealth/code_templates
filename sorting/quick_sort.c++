@@ -2,43 +2,43 @@
 
 using namespace std;
 
-int fun(vector<int>& arr, int low, int high){
-    int pivot = arr[low];
-    int i = low;
-    int j = high;
+int fn(vector<int>& v, int left, int right){
+    int pivot = v[left];
+
+    int i = left;
+    int j = right;
     while(i<j){
-        while(arr[i] <= pivot && i <= high-1){
+        while(v[i] <= pivot && i <= right)
             i++;
-        }
-
-        while(arr[j] > pivot && j >= low+1){
+        while(v[j] > pivot && j>=left) 
             j--;
-        }
-
-        if(i<j)
-            swap(arr[i], arr[j]);
+        if(i<j) swap(v[i], v[j]);
     }
-    swap(arr[low], arr[j]);
+
+    swap(v[left], v[j]);
     return j;
 }
 
-void quickSort(vector<int>& arr, int low, int high){
-    if(low < high){
-        int partIndex = fun(arr, low, high);
-        quickSort(arr, low, partIndex-1);
-        quickSort(arr, partIndex+1, high);
-    }    
+void quickSort(vector<int>& v, int left, int right){
+    if(left >= right)   return ;
+
+    int partition = fn(v, left, right);
+    quickSort(v, left, partition - 1);
+    quickSort(v, partition + 1, right);
+
 }
 
 int main(){
     int n;
     cin>>n;
     vector<int> v(n);
-    for(int i = 0; i<n;i++)
+    for(int i = 0; i<n; i++)
         cin>>v[i];
-    cout<<"ans = "<<endl;
+
     quickSort(v, 0, n-1);
+
     for(int i = 0; i<n; i++)
         cout<<v[i]<<" ";
+    cout<<endl;
     return 0;
 }
